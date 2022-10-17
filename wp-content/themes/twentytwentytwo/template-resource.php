@@ -1,13 +1,31 @@
+<?php $terms = get_terms('priority');
+  
+  foreach($terms as $term){
+    echo '<li><a href="?priority= '.$term->slug.' " >'. $term->name . '</a></li>';
+  }
+  ?>
  
-<?php
-/*Template Name: Resource*/
-get_header();
-query_posts(array(
-   'post_type' => 'resource'
-)); ?>
-<?php
-while (have_posts()) : the_post(); ?>
-<h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-<p><?php the_excerpt(); ?></p>
-<?php endwhile;
-get_footer();
+<?php 
+
+  $priorities = $_GET['priority']; 
+
+  $hompage = array(
+    'post_type' => 'resource',
+    'post_status'=> 'publish',
+    'tax_query'=> array(
+        array(
+            'taxonomy' => 'priority',
+            'field' => 'name',
+            'terms' =>  $priorities
+        )
+    )
+  ); 
+  $hompageEvent = new WP_Query($hompage);
+  var_dump($hompageEvent->have_posts());
+  while($hompageEvent->have_posts()){
+    $hompageEvent->the_post();?>
+    <li><a href="<?php the_permalink()?>" target="_blank" rel="noopener noreferrer">
+    <?php the_title(); ?>
+    </a></li>
+  <?php }
+  ?>
