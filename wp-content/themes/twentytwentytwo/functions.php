@@ -148,3 +148,12 @@ function add_custom_taxonomies() {
 	));
   }
   add_action( 'init', 'add_custom_taxonomies', 0 );
+
+function members_only(){
+	if (is_page('Secret Page') && ! is_user_logged_in()){
+		wp_redirect(home_url());
+		die();
+	}
+}
+add_action( 'template_redirect', 'members_only' );
+

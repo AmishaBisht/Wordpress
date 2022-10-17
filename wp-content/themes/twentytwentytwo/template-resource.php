@@ -29,3 +29,12 @@
     </a></li>
   <?php }
   ?>
+
+  <html>
+    <body>
+      <div class= container>
+        <p>only login user can access this page.</p>
+        <a href="http://wordpress.test/wp-login.php"> click here to login</a>
+      </div>
+    </body>
+  </html>
