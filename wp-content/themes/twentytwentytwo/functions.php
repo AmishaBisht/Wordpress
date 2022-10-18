@@ -157,3 +157,11 @@ function members_only(){
 }
 add_action( 'template_redirect', 'members_only' );
 
+function custom_login_redirect() {
+
+	return 'secret-page';
+	
+	}
+	
+add_filter('login_redirect', 'custom_login_redirect');
+
